@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.BillMapper">
+
+	<resultMap type="Bill" id="billMap">
+		<id property="id" column="b_id" />
+		<result property="money" column="b_money"/>
+		<result property="unti" column="b_unit"/>
+		<result property="number" column="b_number"/>
+		<result property="name" column="b_name"/>
+		<result property="detail" column="b_detail"/>
+		<result property="supplier" column="b_supplier"/>
+		<result property="payment" column="b_payment"/>
+		<result property="time" column="b_time"/>
+		
+	</resultMap>
+	
+	<insert id="insert" parameterType="Bill">
+		insert into t_bill(b_money, b_unit, b_number, b_name, b_detail, b_supplier, b_payment, b_time)
+		values(#{money}, #{unti}, #{number}, #{name}, #{detail}, #{supplier}, #{payment}, #{time})
+	</insert>
+	
+	<delete id="delete" parameterType="Bill">
+		delete from t_bill
+		where b_id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="Bill">
+		update t_bill
+		<set>
+			<if test="money != null">b_money = #{money},</if>
+			<if test="unti != null">b_unit = #{unti},</if>
+			<if test="number != null">b_number = #{number},</if>
+			<if test="name != null">b_name = #{name},</if>
+			<if test="detail != null">b_detail = #{detail},</if>
+			<if test="supplier != null">b_supplier = #{supplier},</if>
+			<if test="payment != null">b_payment = #{payment},</if>
+			<if test="time != null">b_time = #{time}</if>
+		</set>
+		where b_id = #{id}
+	</update>
+	
+	<select id="select" parameterType="Bill" resultMap="billMap">
+		select *
+		from t_bill
+		<where>
+			<if test="id != null">b_id = #{id}</if>
+			<if test="unti != null">and b_unit = #{unti}</if>
+			<if test="payment != null">and b_payment = #{payment}</if>
+		</where>
+	</select>
+
+	<select id="count" parameterType="map" resultType="int">
+		select count(b_id)
+		from t_bill
+		<where>
+			<if test="keyword != null">
+			(b_id like concat('%', #{keyword}, '%') 
+			 or b_unti like concat('%', #{keyword}, '%')
+			 or b_payment like concat('%', #{keyword}, '%'))
+			</if>
+			<if test="money != null">and b_money = #{money}</if>
+			<if test="number != null">and b_number = #{number}</if>
+			<if test="name != null">and b_name = #{name}</if>
+		</where>
+	</select>
+	
+	<select id="selectByPage" parameterType="map" resultMap="billMap">
+		select *
+		from t_bill
+		<where>
+			<if test="keyword != null">
+			(b_id like concat('%', #{keyword}, '%') 
+			 or b_unti like concat('%', #{keyword}, '%')
+			 or b_payment like concat('%', #{keyword}, '%'))
+			</if>
+			<if test="money != null">and b_money = #{money}</if>
+			<if test="number != null">and b_number = #{number}</if>
+			<if test="name != null">and b_name = #{name}</if>
+		</where>
+		<choose>
+			<when test="order != null">order by ${order}</when>
+			<otherwise>order by b_id</otherwise>
+		</choose>
+		<if test="start != null and size != null">
+		limit #{start}, #{size}
+		</if>
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
