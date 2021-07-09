@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * �˵�ʵ����
+ * �˵�ʵ����
  * @author asuna
  *
  */
@@ -21,14 +21,21 @@ public class Bill implements Serializable {
 	private String supplier;
 	private Integer payment;
 	private Date time;
-	
+	/*
+	* 无参构造
+	* */
 	public Bill() {
 	}
-
+	/*
+	 * 主键构造
+	 * */
 	public Bill(Integer id) {
 		this.id = id;
 	}
 
+	/*
+	 * 有参构造
+	 * */
 	public Bill(Integer id, Integer money, String unti, Integer number, String name, String detail, String supplier,
 			Integer payment, String time) {
 		this.id = id;
