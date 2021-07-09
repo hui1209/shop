@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.SupplierMapper">
+
+	<resultMap type="Supplier" id="supplierMap">
+		<id property="id" column="s_id" />
+		<result property="name" column="s_name"/>
+		<result property="detail" column="s_detail"/>
+		<result property="contacts" column="s_contacts"/>
+		<result property="phone" column="s_phone"/>
+		<result property="fax" column="s_fax"/>
+		<result property="address" column="s_address"/>
+		
+	</resultMap>
+	
+	<insert id="insert" parameterType="Supplier">
+		insert into t_supplier(s_name, s_detail, s_contacts, s_phone, s_fax, s_address)
+		values(#{name}, #{detail}, #{contacts}, #{phone}, #{fax}, #{address})
+	</insert>
+	
+	<delete id="delete" parameterType="Supplier">
+		delete from t_supplier
+		where s_id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="Supplier">
+		update t_supplier
+		<set>
+			<if test="name != null">s_name = #{name},</if>
+			<if test="detail != null">s_detail = #{detail},</if>
+			<if test="contacts != null">s_contacts = #{contacts},</if>
+			<if test="phone != null">s_phone = #{phone},</if>
+			<if test="fax != null">s_fax = #{fax},</if>
+			<if test="address != null">s_address = #{address},</if>
+		</set>
+		where s_id = #{id}
+	</update>
+	
+	<select id="select" parameterType="Supplier" resultMap="supplierMap">
+		select *
+		from t_supplier
+		<where>
+			<if test="id != null">s_id = #{id}</if>
+			<if test="name != null">and s_name = #{name}</if>
+			<if test="detail != null">and s_detail = #{detail}</if>
+		</where>
+	</select>
+
+	<select id="count" parameterType="map" resultType="int">
+		select count(s_id)
+		from t_supplier
+		<where>
+			<if test="keyword != null">
+			(s_id like concat('%', #{keyword}, '%') 
+			 or s_name like concat('%', #{keyword}, '%')
+			 or s_detail like concat('%', #{keyword}, '%'))
+			</if>
+			<if test="contacts != null">s_contacts = #{contacts}</if>
+		</where>
+	</select>
+	
+	<select id="selectByPage" parameterType="map" resultMap="supplierMap">
+		select *
+		from t_supplier
+		<where>
+			<if test="keyword != null">
+			(s_id like concat('%', #{keyword}, '%') 
+			 or s_name like concat('%', #{keyword}, '%')
+			 or s_detail like concat('%', #{keyword}, '%'))
+			</if>
+			<if test="contacts != null">s_contacts = #{contacts}</if>
+		</where>
+		<choose>
+			<when test="order != null">order by ${order}</when>
+			<otherwise>order by s_id</otherwise>
+		</choose>
+		<if test="start != null and size != null">
+		limit #{start}, #{size}
+		</if>
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
