@@ -21,9 +21,11 @@ import com.service.SupplierService;
 import com.service.UserService;
 import com.util.PageAssistant;
 
+
 /**
- * ÓÃ»§ÒµÎñ¿ØÖÆÆ÷(Õ¹ÏÖ²ã)
+ * ï¿½Ã»ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Õ¹ï¿½Ö²ï¿½)
  * @author Administrator
+ * @DAte
  *
  */
 @Controller
@@ -40,7 +42,7 @@ public class UserAction {
 	private SupplierService supplierService;
 	
 	/**
-	 * ¹©Ó¦ÉÌ²éÑ¯
+	 * ï¿½ï¿½Ó¦ï¿½Ì²ï¿½Ñ¯
 	 * @return
 	 */
 	@RequestMapping("querySupplier")
@@ -49,14 +51,14 @@ public class UserAction {
 		System.out.println(supplier);
 		System.out.println(pa);
 		
-		/* 1. ¹¹½¨map¼¯ºÏ, Ìí¼Ó²éÑ¯²ÎÊý */
-		//ÉùÃ÷map¼¯ºÏ
+		/* 1. ï¿½ï¿½ï¿½ï¿½mapï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ó²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ */
+		//ï¿½ï¿½ï¿½ï¿½mapï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = new HashMap<>();
-		//ÅÐ¶ÏºÍÌí¼Ó²ÎÊý
+		//ï¿½Ð¶Ïºï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½
 		if(supplier.getName() != null) {
-			//È¥³ý¿Õ¸ñ
+			//È¥ï¿½ï¿½ï¿½Õ¸ï¿½
 			supplier.setName(supplier.getName().trim());
-			//ÅÐ¶Ï, ÊÇ·ñ¿Õ×Ö·û´®
+			//ï¿½Ð¶ï¿½, ï¿½Ç·ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 			if(!supplier.getName().equals("")) {
 				map.put("keyword", supplier.getName());
 			}
@@ -65,27 +67,27 @@ public class UserAction {
 			map.put("detail", supplier.getDetail());
 		}
 		
-		/* 2. ²éÑ¯»ñÈ¡×Ü¼ÇÂ¼Êý */
+		/* 2. ï¿½ï¿½Ñ¯ï¿½ï¿½È¡ï¿½Ü¼ï¿½Â¼ï¿½ï¿½ */
 		pa.setCount(supplierService.count(map));
 		
-		/* 3. Ìí¼Ó·ÖÒ³²ÎÊý */
+		/* 3. ï¿½ï¿½Ó·ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ */
 		map.put("start", pa.getStart());
 		map.put("size", pa.getPageSize());
 		
-		/* 4. ²éÑ¯ */
+		/* 4. ï¿½ï¿½Ñ¯ */
 		List<Supplier> list = supplierService.selectByPage(map);
 		
-		/* 5. ±£´æÊý¾Ý */
-		session.setAttribute("supplierList", list); //ÐèÒªÏÔÊ¾µÄ¼¯ºÏ
-		session.setAttribute("querySupplierInfo", supplier); //²éÑ¯Ìõ¼þ
-		session.setAttribute("pa", pa); //·ÖÒ³ÖúÊÖ
+		/* 5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+		session.setAttribute("supplierList", list); //ï¿½ï¿½Òªï¿½ï¿½Ê¾ï¿½Ä¼ï¿½ï¿½ï¿½
+		session.setAttribute("querySupplierInfo", supplier); //ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+		session.setAttribute("pa", pa); //ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
 		
 		return "/page/supplier/list.jsp";
 		
 	}
 	
 	/**
-	 * ÕËµ¥²éÑ¯
+	 * ï¿½Ëµï¿½ï¿½ï¿½Ñ¯
 	 * @return
 	 */
 	@RequestMapping("queryBill")
@@ -94,14 +96,14 @@ public class UserAction {
 		System.out.println(bill);
 		System.out.println(pa);
 		
-		/* 1. ¹¹½¨map¼¯ºÏ, Ìí¼Ó²éÑ¯²ÎÊý */
-		//ÉùÃ÷map¼¯ºÏ
+		/* 1. ï¿½ï¿½ï¿½ï¿½mapï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ó²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ */
+		//ï¿½ï¿½ï¿½ï¿½mapï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = new HashMap<>();
-		//ÅÐ¶ÏºÍÌí¼Ó²ÎÊý
+		//ï¿½Ð¶Ïºï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½
 		if(bill.getName() != null) {
-			//È¥³ý¿Õ¸ñ
+			//È¥ï¿½ï¿½ï¿½Õ¸ï¿½
 			bill.setName(bill.getName().trim());
-			//ÅÐ¶Ï, ÊÇ·ñ¿Õ×Ö·û´®
+			//ï¿½Ð¶ï¿½, ï¿½Ç·ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 			if(!bill.getName().equals("")) {
 				map.put("keyword", bill.getName());
 			}
@@ -110,28 +112,28 @@ public class UserAction {
 			map.put("payment", bill.getPayment());
 		}
 		
-		/* 2. ²éÑ¯»ñÈ¡×Ü¼ÇÂ¼Êý */
+		/* 2. ï¿½ï¿½Ñ¯ï¿½ï¿½È¡ï¿½Ü¼ï¿½Â¼ï¿½ï¿½ */
 		pa.setCount(billService.count(map));
 		
-		/* 3. Ìí¼Ó·ÖÒ³²ÎÊý */
+		/* 3. ï¿½ï¿½Ó·ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ */
 		map.put("start", pa.getStart());
 		map.put("size", pa.getPageSize());
 		
-		/* 4. ²éÑ¯ */
+		/* 4. ï¿½ï¿½Ñ¯ */
 		List<Bill> list = billService.selectByPage(map);
 		
-		/* 5. ±£´æÊý¾Ý */
-		session.setAttribute("billList", list); //ÐèÒªÏÔÊ¾µÄ¼¯ºÏ
+		/* 5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+		session.setAttribute("billList", list); //ï¿½ï¿½Òªï¿½ï¿½Ê¾ï¿½Ä¼ï¿½ï¿½ï¿½
 		System.out.println(list.get(0).getTime());
-		session.setAttribute("queryBillInfo", bill); //²éÑ¯Ìõ¼þ
-		session.setAttribute("pa", pa); //·ÖÒ³ÖúÊÖ
+		session.setAttribute("queryBillInfo", bill); //ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+		session.setAttribute("pa", pa); //ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
 		
 		return "/page/bill/list.jsp";
 		
 	}
 	
 	/**
-	 * Ìí¼ÓÊý¾Ý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@RequestMapping("insertUser")
@@ -146,7 +148,7 @@ public class UserAction {
 	}
 	
 	/**
-	 * Ìø×ª
+	 * ï¿½ï¿½×ª
 	 * @return
 	 */
 	@RequestMapping("jump")
@@ -158,7 +160,7 @@ public class UserAction {
 	}
 	
 	/**
-	 * ÐÞ¸ÄÓÃ»§Êý¾Ý
+	 * ï¿½Þ¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@RequestMapping("modify")
@@ -166,17 +168,17 @@ public class UserAction {
 		System.out.println("--> user modify");
 		System.out.println(user);
 		
-		/* ÐÞ¸Ä */
+		/* ï¿½Þ¸ï¿½ */
 		userService.update(user);
 		
-		/* ±£´æ */
-		session.setAttribute("hint", "ÓÃ»§ÐÅÏ¢ÐÞ¸Ä³É¹¦!");
+		/* ï¿½ï¿½ï¿½ï¿½ */
+		session.setAttribute("hint", "ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½Þ¸Ä³É¹ï¿½!");
 		
 		return "queryOne";
 	}
 	
 	/**
-	 * É¾³ýÓÃ»§
+	 * É¾ï¿½ï¿½ï¿½Ã»ï¿½
 	 * @return
 	 */
 	@RequestMapping("delete")
@@ -184,18 +186,18 @@ public class UserAction {
 		System.out.println("--> user delete");
 		System.out.println(user);
 		
-		/* É¾³ý */
+		/* É¾ï¿½ï¿½ */
 		userService.delete(user);
 		
-		/* ±£´æÌáÊ¾ÐÅÏ¢ */
-		session.setAttribute("hint", "É¾³ýÓÃ»§³É¹¦!");
+		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ */
+		session.setAttribute("hint", "É¾ï¿½ï¿½ï¿½Ã»ï¿½ï¿½É¹ï¿½!");
 		session.setAttribute("hintClass", "suc-hint");
 		
 		return "redirect:/user/query";
 	}
 	
 	/**
-	 * ¸ù¾Ýid²éÑ¯¾ßÌåÕËµ¥ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ï¢
 	 * @return
 	 */
 	@RequestMapping("queryBillOne")
@@ -203,17 +205,17 @@ public class UserAction {
 		System.out.println("--> bill query one by id");
 		System.out.println(bill);
 		
-		/* ²éÑ¯ */
+		/* ï¿½ï¿½Ñ¯ */
 		bill = billService.select(bill).get(0);
 		
-		/* ±£´æ */
+		/* ï¿½ï¿½ï¿½ï¿½ */
 		session.setAttribute("billInfo", bill);
 
 		return "/page/bill/info.jsp";
 	}
 	
 	/**
-	 * ¸ù¾Ýid²éÑ¯¾ßÌåÓÃ»§ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	 * @return
 	 */
 	@RequestMapping("queryOne")
@@ -221,17 +223,17 @@ public class UserAction {
 		System.out.println("--> user query one by id");
 		System.out.println(user);
 		
-		/* ²éÑ¯ */
+		/* ï¿½ï¿½Ñ¯ */
 		user = userService.select(user).get(0);
 		
-		/* ±£´æ */
+		/* ï¿½ï¿½ï¿½ï¿½ */
 		session.setAttribute("userInfo", user);
 
 		return "/page/user/info.jsp";
 	}
 	
 	/**
-	 * ²éÑ¯
+	 * ï¿½ï¿½Ñ¯
 	 * @return
 	 */
 	@RequestMapping("query")
@@ -240,14 +242,14 @@ public class UserAction {
 		System.out.println(user);
 		System.out.println(pa);
 		
-		/* 1. ¹¹½¨map¼¯ºÏ, Ìí¼Ó²éÑ¯²ÎÊý */
-		//ÉùÃ÷map¼¯ºÏ
+		/* 1. ï¿½ï¿½ï¿½ï¿½mapï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ó²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ */
+		//ï¿½ï¿½ï¿½ï¿½mapï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = new HashMap<>();
-		//ÅÐ¶ÏºÍÌí¼Ó²ÎÊý
+		//ï¿½Ð¶Ïºï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½
 		if(user.getUserName() != null) {
-			//È¥³ý¿Õ¸ñ
+			//È¥ï¿½ï¿½ï¿½Õ¸ï¿½
 			user.setUserName(user.getUserName().trim());
-			//ÅÐ¶Ï, ÊÇ·ñ¿Õ×Ö·û´®
+			//ï¿½Ð¶ï¿½, ï¿½Ç·ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 			if(!user.getUserName().equals("")) {
 				map.put("keyword", user.getUserName());
 			}
@@ -259,27 +261,27 @@ public class UserAction {
 			map.put("age", user.getAge());
 		}
 		
-		/* 2. ²éÑ¯»ñÈ¡×Ü¼ÇÂ¼Êý */
+		/* 2. ï¿½ï¿½Ñ¯ï¿½ï¿½È¡ï¿½Ü¼ï¿½Â¼ï¿½ï¿½ */
 		pa.setCount(userService.count(map));
 		
-		/* 3. Ìí¼Ó·ÖÒ³²ÎÊý */
+		/* 3. ï¿½ï¿½Ó·ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ */
 		map.put("start", pa.getStart());
 		map.put("size", pa.getPageSize());
 		
-		/* 4. ²éÑ¯ */
+		/* 4. ï¿½ï¿½Ñ¯ */
 		List<User> list = userService.selectByPage(map);
 		
-		/* 5. ±£´æÊý¾Ý */
-		session.setAttribute("userList", list); //ÐèÒªÏÔÊ¾µÄ¼¯ºÏ
-		session.setAttribute("queryInfo", user); //²éÑ¯Ìõ¼þ
-		session.setAttribute("pa", pa); //·ÖÒ³ÖúÊÖ
+		/* 5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+		session.setAttribute("userList", list); //ï¿½ï¿½Òªï¿½ï¿½Ê¾ï¿½Ä¼ï¿½ï¿½ï¿½
+		session.setAttribute("queryInfo", user); //ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+		session.setAttribute("pa", pa); //ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
 		
 		return "/page/user/list.jsp";
 		
 	}
 	
 	/**
-	 * ÍË³ö
+	 * ï¿½Ë³ï¿½
 	 * @param session
 	 * @return
 	 */
@@ -288,14 +290,14 @@ public class UserAction {
 		
 		System.out.println("--> user logoff");
 		
-		//Ïú»Ù»á»°
+		//ï¿½ï¿½ï¿½Ù»á»°
 		session.invalidate();
 		
 		return "redirect:/login.jsp";
 	}
 	
 	/**
-	 * µÇÂ¼
+	 * ï¿½ï¿½Â¼
 	 * @return
 	 */
 	@RequestMapping("login")
@@ -304,11 +306,11 @@ public class UserAction {
 		System.out.println("--> user login");
 		System.out.println(user);
 		
-		/* 1. ²éÑ¯ */
+		/* 1. ï¿½ï¿½Ñ¯ */
 		List<User> list = userService.select(user);
-		/* 2. ÅÐ¶Ï, ÊÇ·ñµÇÂ¼³É¹¦ */
+		/* 2. ï¿½Ð¶ï¿½, ï¿½Ç·ï¿½ï¿½Â¼ï¿½É¹ï¿½ */
 		if(list.size() != 1) {
-			session.setAttribute("errMsg", "ÓÃ»§Ãû»òÃÜÂë´íÎó!");
+			session.setAttribute("errMsg", "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 			return "redirect:/login.jsp";
 		}
 		
@@ -317,7 +319,7 @@ public class UserAction {
 	}
 	
 	/**
-	 * ²éÑ¯½ÇÉ«¼¯ºÏ
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@RequestMapping("queryRoles")
@@ -325,14 +327,14 @@ public class UserAction {
 		
 		System.out.println("--> user query roles");
 		
-		/* 1. ²éÑ¯ */
-		//»ñÈ¡application¶ÔÏó
+		/* 1. ï¿½ï¿½Ñ¯ */
+		//ï¿½ï¿½È¡applicationï¿½ï¿½ï¿½ï¿½
 		ServletContext application = session.getServletContext();
-		//ÅÐ¶Ï
+		//ï¿½Ð¶ï¿½
 		if(application.getAttribute("roleList") == null) {
-			//²éÑ¯
+			//ï¿½ï¿½Ñ¯
 			List<Role> list = roleService.select(null);
-			//±£´æ
+			//ï¿½ï¿½ï¿½ï¿½
 			application.setAttribute("roleList", list);
 		}
 		
